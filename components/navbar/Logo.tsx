@@ -6,7 +6,7 @@ const Logo = () => {
   return (
     <Button size={'icon'} asChild>
       <Link href='/'>
-        <MdOutlineChair className='w-7 h-7' />
+        <MdOutlineChair className='w-6 h-6' />
       </Link>
     </Button>
   );
