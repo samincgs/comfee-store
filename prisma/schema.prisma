@@ -14,7 +14,15 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Post {
+model Product {
   id String @id @default(uuid())
+  clerkId String
   name String
+  image String
+  description String
+  company String
+  price Int
+  featured Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
