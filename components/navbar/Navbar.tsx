@@ -11,7 +11,7 @@ const Navbar = () => {
       <Container className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-6'>
         <Logo />
         <NavSearch />
-        <div className='flex items-center gap-6'>
+        <div className='flex items-center gap-4'>
           <CartButton />
           <DarkMode />
           <LinksDropdown />

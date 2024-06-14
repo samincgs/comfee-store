@@ -4,7 +4,7 @@ const NavSearch = () => {
   return (
     <Input
       type='text'
-      className='max-w-xs dark:bg-muted'
+      className='max-w-sm dark:bg-secondary'
       placeholder='search product...'
       required
     />
