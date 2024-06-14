@@ -1,0 +1,48 @@
+[
+  {
+    "clerkId": "clerkId",
+    "name": "Modern Sofa",
+    "image": "https://images.pexels.com/photos/1571471/pexels-photo-1571471.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "description": "Upgrade your living space with this stylish and comfortable modern sofa. Featuring a sleek design and high-quality fabric, this sofa offers both aesthetics and durability. The plush cushions provide exceptional comfort, while the sturdy frame ensures long-lasting use. Perfect for relaxing after a long day or entertaining guests, this sofa is a versatile addition to any home. Its neutral color scheme blends seamlessly with various interior decor styles, making it a must-have piece for your living room.",
+    "company": "ComfortHome",
+    "price": 799,
+    "featured": true
+  },
+  {
+    "clerkId": "clerkId",
+    "name": "Ergonomic Office Chair",
+    "image": "https://images.pexels.com/photos/7195522/pexels-photo-7195522.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "description": "Experience unparalleled comfort and support with this ergonomic office chair. Designed to promote better posture and reduce strain on your back and neck, this chair features adjustable height, tilt, and lumbar support. The breathable mesh back keeps you cool during long work hours, while the cushioned seat provides superior comfort. Ideal for home offices or professional settings, this chair combines functionality and style to enhance your workspace.",
+    "company": "WorkWell",
+    "price": 299,
+    "featured": false
+  },
+  {
+    "clerkId": "clerkId",
+    "name": "Modern Sleeper Sofa",
+    "image": "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "description": "Maximize space and functionality with this modern sleeper sofa. Upholstered in durable fabric and featuring a sleek design, this sofa seamlessly transitions from stylish seating to a comfortable bed. The easy-to-use mechanism allows you to quickly convert it into a bed for overnight guests or spontaneous naps. The sturdy frame and supportive cushions ensure both comfort and durability. Perfect for apartments, guest rooms, or any living space where versatility is key, this sleeper sofa combines practicality with contemporary design.",
+    "company": "UrbanComfort",
+    "price": 1099,
+    "featured": true
+  },
+
+  {
+    "clerkId": "clerkId",
+    "name": "Elegant Floor Lamp",
+    "image": "https://images.pexels.com/photos/5950079/pexels-photo-5950079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "description": "Illuminate your home with this elegant floor lamp. Featuring a sleek design and a sturdy base, this lamp adds a touch of sophistication to any room. The adjustable head allows you to direct light where you need it most, making it perfect for reading, working, or creating a cozy ambiance. The energy-efficient LED bulb provides bright, warm light while saving on electricity costs. This floor lamp is an excellent addition to your living room, bedroom, or study, offering both functionality and style.",
+    "company": "BrightLiving",
+    "price": 149,
+    "featured": false
+  },
+  {
+    "clerkId": "clerkId",
+    "name": "Wooden Dining Table",
+    "image": "https://images.pexels.com/photos/11414433/pexels-photo-11414433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "description": "Create a warm and inviting dining space with this wooden dining table. Crafted from high-quality solid wood, this table features a beautiful natural finish that enhances the grain and character of the wood. The sturdy construction ensures durability, while the spacious tabletop provides ample room for meals, gatherings, and activities. Perfect for family dinners or entertaining guests, this dining table combines traditional craftsmanship with modern design to complement any dining area.",
+    "company": "HomeHarvest",
+    "price": 699,
+    "featured": true
+  }
+]
