@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <Navbar />
-        <Container className='py-20'>{children}</Container>
+        <Container className='py-16'>{children}</Container>
       </body>
     </html>
   );
