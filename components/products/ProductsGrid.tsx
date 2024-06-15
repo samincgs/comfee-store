@@ -18,7 +18,7 @@ const ProductsGrid = ({ products }: ProductsGridProps) => {
         const productId = product.id;
         const formattedPrice = formatCurrency(price);
         return (
-          <div key={productId} className='group relative'>
+          <div key={productId} className='group relative mb-4'>
             <Card className='shadow-md group-hover:shadow-xl transition-shadow duration-300'>
               <CardContent className='p-0'>
                 <Link href={`/products/${productId}`}>
