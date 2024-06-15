@@ -6,3 +6,7 @@ export const formatCurrency = (amount: number | null) => {
     currency: 'USD',
   }).format(value);
 };
+
+export const formatString = (quantity: number) => {
+  return quantity === 1 ? '' : 's';
+};
