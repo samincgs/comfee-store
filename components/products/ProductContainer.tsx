@@ -13,7 +13,7 @@ type ProductContainerProps = {
 };
 
 const ProductContainer = async ({ layout, search }: ProductContainerProps) => {
-  const products = await fetchAllProducts();
+  const products = await fetchAllProducts({ search });
   const totalProducts = products.length;
   const productsFormat = formatString(totalProducts);
 
