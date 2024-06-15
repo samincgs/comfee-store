@@ -12,7 +12,7 @@ type ProductsGridProps = {
 
 const ProductsGrid = ({ products }: ProductsGridProps) => {
   return (
-    <div className='pt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+    <div className='mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
       {products.map((product) => {
         const { name, price, image, company } = product;
         const productId = product.id;
@@ -22,7 +22,7 @@ const ProductsGrid = ({ products }: ProductsGridProps) => {
             <Card className='shadow-md group-hover:shadow-xl transition-shadow duration-300'>
               <CardContent className='p-0'>
                 <Link href={`/products/${productId}`}>
-                  <div className='relative h-52 rounded-md overflow-hidden '>
+                  <div className='relative h-[200px] rounded-md overflow-hidden '>
                     <Image
                       src={image}
                       alt={name}

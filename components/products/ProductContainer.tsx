@@ -23,7 +23,7 @@ const ProductContainer = async ({ layout, search }: ProductContainerProps) => {
     <>
       {/* HEADER */}
       <div className='flex justify-between items-center mb-4'>
-        <h4 className='font-medium text-lg text-muted-foreground'>
+        <h4 className='font-medium text-xl text-muted-foreground'>
           {totalProducts} product{productsFormat}
         </h4>
         <div className='flex items-center gap-4'>
