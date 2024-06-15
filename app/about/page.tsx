@@ -13,7 +13,7 @@ const AboutPage = () => {
         comfortable pieces, we strive to create spaces that reflect your unique
         taste and lifestyle. Our mission is to provide a seamless shopping
         experience, offering quality products that enhance your home with
-        elegance and comfort. Explore our collection and discover how we're
+        elegance and comfort. Explore our collection and discover how we are
         redefining the art of furnishing homes.
       </p>
     </div>
