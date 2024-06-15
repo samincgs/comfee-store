@@ -1,4 +1,6 @@
+import Breadcrumbs from '@/components/products/Breadcrumbs';
+
 const FavoritesPage = () => {
-  return <div>FavoritesPage</div>;
+  return <div>favorites page</div>;
 };
 export default FavoritesPage;

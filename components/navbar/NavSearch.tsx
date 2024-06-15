@@ -33,7 +33,7 @@ const NavSearch = () => {
 
   return (
     <Input
-      type='text'
+      type='search'
       className='max-w-sm dark:bg-secondary'
       placeholder='search product...'
       required
