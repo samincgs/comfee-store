@@ -34,7 +34,7 @@ const CreateProductPage = () => {
             <ImageInput />
           </div>
           <TextAreaInput name='description' defaultValue={defaultDescription} />
-          <div className='my-6'>
+          <div className='my-8'>
             <CheckboxInput name='featured' />
           </div>
           <SubmitButton text='Create Product' />
