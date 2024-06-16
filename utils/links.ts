@@ -1,9 +1,9 @@
-type NavLinks = {
+type Links = {
   label: string;
   href: string;
 };
 
-export const links: NavLinks[] = [
+export const links: Links[] = [
   {
     label: 'Home',
     href: '/',
@@ -27,5 +27,24 @@ export const links: NavLinks[] = [
   {
     label: 'Orders',
     href: '/orders',
+  },
+  {
+    label: 'Dashboard',
+    href: '/admin/sales',
+  },
+];
+
+export const adminLinks: Links[] = [
+  {
+    label: 'Sales',
+    href: '/admin/sales',
+  },
+  {
+    label: 'My Products',
+    href: '/admin/products',
+  },
+  {
+    label: 'Create Product',
+    href: '/admin/products/create',
   },
 ];
