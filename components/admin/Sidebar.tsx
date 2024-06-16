@@ -16,7 +16,7 @@ const Sidebar = () => {
             key={link.href}
             variant={isActive ? 'default' : 'ghost'}
             asChild
-            className='flex flex-col items-start mb-2'
+            className='flex flex-col items-start mb-2 max-w-md'
           >
             <Link href={link.href}>{link.label}</Link>
           </Button>

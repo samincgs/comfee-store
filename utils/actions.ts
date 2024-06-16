@@ -1,3 +1,6 @@
+'use server';
+// PUT USE SERVER AT THE TOP IF YOU ARE DEALING WITH FORMDATA
+
 import { db } from './db';
 import { redirect } from 'next/navigation';
 
@@ -49,4 +52,9 @@ export async function fetchSingleProduct({ id }: { id: string }) {
   }
 
   return product;
+}
+
+export async function createProductAction(prevState: any, formData: FormData) {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return { message: 'Product created successfully' };
 }
