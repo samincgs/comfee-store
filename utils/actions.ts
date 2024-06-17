@@ -1,9 +1,10 @@
 'use server';
-import { auth } from '@clerk/nextjs/server';
 // PUT USE SERVER AT THE TOP IF YOU ARE DEALING WITH FORMDATA
 
+import { auth } from '@clerk/nextjs/server';
 import { db } from './db';
 import { redirect } from 'next/navigation';
+import { productSchema, validateSchema } from './schemas';
 
 function getAuthUser() {
   const { userId } = auth();
@@ -74,6 +75,15 @@ export async function createProductAction(prevState: any, formData: FormData) {
 
   try {
     const rawData = Object.fromEntries(formData);
+    const validatedFields = validateSchema(productSchema, rawData);
+
+    await db.product.create({
+      data: {
+        clerkId: userId,
+        ...validatedFields,
+        image: '/images/product-1.jpg',
+      },
+    });
 
     return { message: 'Product created successfully' };
   } catch (error) {
