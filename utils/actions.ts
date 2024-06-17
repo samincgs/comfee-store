@@ -4,7 +4,8 @@
 import { auth } from '@clerk/nextjs/server';
 import { db } from './db';
 import { redirect } from 'next/navigation';
-import { productSchema, validateSchema } from './schemas';
+import { imageSchema, productSchema, validateSchema } from './schemas';
+import { uploadImage } from './supabase';
 
 function getAuthUser() {
   const { userId } = auth();
@@ -75,18 +76,21 @@ export async function createProductAction(prevState: any, formData: FormData) {
 
   try {
     const rawData = Object.fromEntries(formData);
+    const file = formData.get('image') as File;
     const validatedFields = validateSchema(productSchema, rawData);
+    const validatedFile = validateSchema(imageSchema, { image: file });
+    const fullPath = await uploadImage(validatedFile.image);
 
     await db.product.create({
       data: {
         clerkId: userId,
+        image: fullPath,
         ...validatedFields,
-        image: '/images/product-1.jpg',
       },
     });
-
-    return { message: 'Product created successfully' };
   } catch (error) {
     return renderError(error);
   }
+
+  redirect('/admin/products');
 }

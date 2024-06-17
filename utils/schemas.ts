@@ -27,6 +27,10 @@ export const productSchema = z.object({
   featured: z.coerce.boolean(),
 });
 
+export const imageSchema = z.object({
+  image: validateImageFile(),
+});
+
 export const validateSchema = <T>(schema: ZodSchema<T>, data: unknown) => {
   const result = schema.safeParse(data);
 
@@ -37,3 +41,18 @@ export const validateSchema = <T>(schema: ZodSchema<T>, data: unknown) => {
 
   return result.data;
 };
+
+function validateImageFile() {
+  const maxUploadSize = 1024 * 1024;
+  const acceptedFileTypes = ['image/'];
+  return z
+    .instanceof(File)
+    .refine((file) => {
+      return !file || file.size <= maxUploadSize;
+    }, 'File size must be less than 1MB')
+    .refine((file) => {
+      return (
+        !file || acceptedFileTypes.some((type) => file.type.startsWith(type))
+      );
+    }, 'File must be an image');
+}
