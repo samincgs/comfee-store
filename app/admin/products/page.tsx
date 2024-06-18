@@ -5,13 +5,15 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
 import EmptyList from '@/components/global/EmptyList';
 import Link from 'next/link';
+import { IconButton } from '@/components/form/Buttons';
+import FormContainer from '@/components/form/FormContainer';
+import { deleteProductAction } from '@/utils/actions';
 
 const AdminProductsPage = async () => {
   const products = await fetchAdminProducts();
@@ -34,6 +36,9 @@ const AdminProductsPage = async () => {
         </TableHeader>
         <TableBody>
           {products.map((product) => {
+            const handleDelete = deleteProductAction.bind(null, {
+              productId: product.id,
+            });
             return (
               <TableRow key={product.id}>
                 <TableCell>
@@ -46,9 +51,13 @@ const AdminProductsPage = async () => {
                 </TableCell>
                 <TableCell>{product.company}</TableCell>
                 <TableCell>{formatCurrency(product.price)}</TableCell>
-                <TableCell className='flex items-center gap-4'>
-                  <p>Edit</p>
-                  <p>Delete</p>
+                <TableCell className='flex items-center'>
+                  <Link href={`/admin/products/${product.id}/edit`}>
+                    <IconButton actionType='edit' />
+                  </Link>
+                  <FormContainer action={handleDelete}>
+                    <IconButton actionType='delete' />
+                  </FormContainer>
                 </TableCell>
               </TableRow>
             );
@@ -58,4 +67,14 @@ const AdminProductsPage = async () => {
     </div>
   );
 };
+
+// const deleteProduct = ({ productId }: { productId: string }) => {
+//   const handleDelete = deleteProductAction.bind(null, { productId });
+//   return (
+//     <FormContainer action={handleDelete}>
+//       <IconButton actionType='delete' />
+//     </FormContainer>
+//   );
+// };
+
 export default AdminProductsPage;

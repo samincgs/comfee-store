@@ -1,21 +1,22 @@
 'use server';
 // PUT USE SERVER AT THE TOP IF YOU ARE DEALING WITH FORMDATA
 
-import { auth } from '@clerk/nextjs/server';
+import { auth, currentUser } from '@clerk/nextjs/server';
 import { db } from './db';
 import { redirect } from 'next/navigation';
 import { imageSchema, productSchema, validateSchema } from './schemas';
 import { uploadImage } from './supabase';
+import { revalidatePath } from 'next/cache';
 
-const getAuthUser = () => {
-  const { userId } = auth();
-  if (!userId) redirect('/');
+const getAuthUser = async () => {
+  const user = await currentUser();
+  if (!user) redirect('/');
 
-  return userId;
+  return user.id;
 };
 
-const getAdminUser = () => {
-  const userId = getAuthUser();
+const getAdminUser = async () => {
+  const userId = await getAuthUser();
 
   if (userId !== process.env.ADMIN_USER_ID) {
     redirect('/');
@@ -85,7 +86,7 @@ export const createProductAction = async (
   prevState: any,
   formData: FormData
 ) => {
-  const userId = getAuthUser();
+  const userId = await getAuthUser();
 
   try {
     const rawData = Object.fromEntries(formData);
@@ -109,7 +110,7 @@ export const createProductAction = async (
 };
 
 export const fetchAdminProducts = async () => {
-  const userId = getAdminUser();
+  const userId = await getAdminUser();
 
   return await db.product.findMany({
     where: {
@@ -119,4 +120,23 @@ export const fetchAdminProducts = async () => {
       createdAt: 'desc',
     },
   });
+};
+
+export const deleteProductAction = async (prevState: { productId: string }) => {
+  const { productId } = prevState;
+  const userId = await getAdminUser();
+
+  try {
+    await db.product.delete({
+      where: {
+        id: productId,
+        clerkId: userId,
+      },
+    });
+
+    revalidatePath('/admin/products');
+    return { message: 'Product deleted successfully' };
+  } catch (error) {
+    return renderError(error);
+  }
 };
