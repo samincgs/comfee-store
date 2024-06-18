@@ -7,21 +7,31 @@ import { redirect } from 'next/navigation';
 import { imageSchema, productSchema, validateSchema } from './schemas';
 import { uploadImage } from './supabase';
 
-function getAuthUser() {
+const getAuthUser = () => {
   const { userId } = auth();
   if (!userId) redirect('/');
 
   return userId;
-}
+};
 
-function renderError(error: unknown) {
+const getAdminUser = () => {
+  const userId = getAuthUser();
+
+  if (userId !== process.env.ADMIN_USER_ID) {
+    redirect('/');
+  }
+
+  return userId;
+};
+
+const renderError = (error: unknown) => {
   console.log(error);
   return {
     message: error instanceof Error ? error.message : 'An error occurred',
   };
-}
+};
 
-export async function fetchFeaturedProducts() {
+export const fetchFeaturedProducts = async () => {
   const products = await db.product.findMany({
     where: {
       featured: true,
@@ -29,9 +39,9 @@ export async function fetchFeaturedProducts() {
   });
 
   return products;
-}
+};
 
-export async function fetchAllProducts({ search = '' }: { search: string }) {
+export const fetchAllProducts = async ({ search = '' }: { search: string }) => {
   const products = await db.product.findMany({
     where: {
       OR: [
@@ -55,9 +65,9 @@ export async function fetchAllProducts({ search = '' }: { search: string }) {
   });
 
   return products;
-}
+};
 
-export async function fetchSingleProduct({ id }: { id: string }) {
+export const fetchSingleProduct = async ({ id }: { id: string }) => {
   const product = await db.product.findUnique({
     where: {
       id,
@@ -69,9 +79,12 @@ export async function fetchSingleProduct({ id }: { id: string }) {
   }
 
   return product;
-}
+};
 
-export async function createProductAction(prevState: any, formData: FormData) {
+export const createProductAction = async (
+  prevState: any,
+  formData: FormData
+) => {
   const userId = getAuthUser();
 
   try {
@@ -93,4 +106,17 @@ export async function createProductAction(prevState: any, formData: FormData) {
   }
 
   redirect('/admin/products');
-}
+};
+
+export const fetchAdminProducts = async () => {
+  const userId = getAdminUser();
+
+  return await db.product.findMany({
+    where: {
+      clerkId: userId,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+};
