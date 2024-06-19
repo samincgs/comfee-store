@@ -142,3 +142,80 @@ export const deleteProductAction = async (prevState: { productId: string }) => {
     return renderError(error);
   }
 };
+
+export const fetchAdminProductDetails = async ({ id }: { id: string }) => {
+  const userId = await getAdminUser();
+
+  const product = await db.product.findUnique({
+    where: {
+      id,
+      clerkId: userId,
+    },
+  });
+
+  if (!product) {
+    redirect('/admin/products');
+  }
+
+  return product;
+};
+
+export const updateProductAction = async (
+  prevState: any,
+  formData: FormData
+) => {
+  const userId = await getAdminUser();
+
+  try {
+    const productId = formData.get('id') as string;
+    const rawData = Object.fromEntries(formData);
+    const validatedFields = validateSchema(productSchema, rawData);
+
+    await db.product.update({
+      where: {
+        id: productId,
+        clerkId: userId,
+      },
+      data: {
+        ...validatedFields,
+      },
+    });
+
+    revalidatePath(`/admin/products/${productId}/edit`);
+    return { message: 'Product updated successfully' };
+  } catch (error) {
+    return renderError(error);
+  }
+};
+
+export const updateProductImageAction = async (
+  prevState: any,
+  formData: FormData
+) => {
+  const userId = await getAdminUser();
+
+  try {
+    const productId = formData.get('id') as string;
+    const oldImageUrl = formData.get('url') as string;
+    const file = formData.get('image') as File;
+    const validatedFields = validateSchema(imageSchema, { image: file });
+    const fullPath = await uploadImage(validatedFields.image);
+
+    await db.product.update({
+      where: {
+        id: productId,
+        clerkId: userId,
+      },
+      data: {
+        image: fullPath,
+      },
+    });
+
+    await deleteImage(oldImageUrl);
+
+    revalidatePath(`/admin/products/${productId}/edit`);
+    return { message: 'Product Image updated successfully' };
+  } catch (error) {
+    return renderError(error);
+  }
+};
