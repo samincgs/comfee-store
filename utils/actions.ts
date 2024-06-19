@@ -5,7 +5,7 @@ import { auth, currentUser } from '@clerk/nextjs/server';
 import { db } from './db';
 import { redirect } from 'next/navigation';
 import { imageSchema, productSchema, validateSchema } from './schemas';
-import { uploadImage } from './supabase';
+import { deleteImage, uploadImage } from './supabase';
 import { revalidatePath } from 'next/cache';
 
 const getAuthUser = async () => {
@@ -133,6 +133,8 @@ export const deleteProductAction = async (prevState: { productId: string }) => {
         clerkId: userId,
       },
     });
+
+    await deleteImage(product.image);
 
     revalidatePath('/admin/products');
     return { message: 'Product deleted successfully' };
