@@ -127,7 +127,7 @@ export const deleteProductAction = async (prevState: { productId: string }) => {
   const userId = await getAdminUser();
 
   try {
-    await db.product.delete({
+    const product = await db.product.delete({
       where: {
         id: productId,
         clerkId: userId,
