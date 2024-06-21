@@ -1,7 +1,7 @@
 'use server';
 // PUT USE SERVER AT THE TOP IF YOU ARE DEALING WITH FORMDATA
 
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import { db } from './db';
 import { redirect } from 'next/navigation';
 import { imageSchema, productSchema, validateSchema } from './schemas';
@@ -215,6 +215,57 @@ export const updateProductImageAction = async (
 
     revalidatePath(`/admin/products/${productId}/edit`);
     return { message: 'Product Image updated successfully' };
+  } catch (error) {
+    return renderError(error);
+  }
+};
+
+export const fetchFavoriteId = async ({ productId }: { productId: string }) => {
+  const userId = await getAuthUser();
+
+  const favorite = await db.favorite.findFirst({
+    where: {
+      productId,
+      clerkId: userId,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  return favorite?.id || null;
+};
+
+export const toggleFavoriteAction = async (prevState: {
+  productId: string;
+  favoriteId: string | null;
+  pathname: string;
+}) => {
+  const userId = await getAuthUser();
+
+  const { productId, favoriteId, pathname } = prevState;
+
+  try {
+    if (favoriteId) {
+      await db.favorite.delete({
+        where: {
+          id: favoriteId,
+        },
+      });
+    } else {
+      await db.favorite.create({
+        data: {
+          clerkId: userId,
+          productId,
+        },
+      });
+    }
+
+    revalidatePath(pathname);
+
+    return {
+      message: favoriteId ? 'Removed from favorites' : 'Added to favorites',
+    };
   } catch (error) {
     return renderError(error);
   }

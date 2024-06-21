@@ -25,4 +25,18 @@ model Product {
   featured Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  favorites Favorite[]
+
+}
+
+model Favorite {
+  id String @id @default(uuid())
+  clerkId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  productId String
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
 }

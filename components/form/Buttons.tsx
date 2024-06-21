@@ -3,6 +3,8 @@ import { useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { Loader2, SquarePen, Trash } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SignInButton } from '@clerk/nextjs';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 
 type SubmitButtonProps = {
   className?: string;
@@ -59,6 +61,32 @@ export const IconButton = ({ actionType }: { actionType: actionType }) => {
   return (
     <Button type='submit' size={'icon'} variant={'ghost'}>
       {pending ? <Loader2 className='w-4 h-4 animate-spin' /> : renderIcon()}
+    </Button>
+  );
+};
+
+export const CardSignInButton = () => {
+  return (
+    <SignInButton mode='modal'>
+      <Button type='button' size={'icon'} variant={'outline'}>
+        <FaRegHeart className='w-4 h-4' />
+      </Button>
+    </SignInButton>
+  );
+};
+
+export const CardSubmitButton = ({ isFavorite }: { isFavorite: boolean }) => {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type='submit' size={'icon'} variant={'outline'} disabled={pending}>
+      {pending ? (
+        <Loader2 className='w-4 h-4 animate-spin' />
+      ) : isFavorite ? (
+        <FaHeart className='w-4 h-4 text-rose-500' />
+      ) : (
+        <FaRegHeart className='w-4 h-4' />
+      )}
     </Button>
   );
 };
