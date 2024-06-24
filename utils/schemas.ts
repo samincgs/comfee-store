@@ -42,6 +42,33 @@ export const validateSchema = <T>(schema: ZodSchema<T>, data: unknown) => {
   return result.data;
 };
 
+export const reviewSchema = z.object({
+  productId: z.string().min(1, {
+    message: 'Product ID must be at least 1 character long',
+  }),
+  authorName: z.string().min(1, {
+    message: 'Author name must be at least 1 character long',
+  }),
+  authorImageUrl: z.string().url(),
+  rating: z.coerce
+    .number()
+    .int()
+    .min(0, {
+      message: 'Rating must be a positive number',
+    })
+    .max(5, {
+      message: 'Rating must be less than or equal to 5',
+    }),
+  comment: z
+    .string()
+    .min(10, {
+      message: 'Comment must be at least  character long',
+    })
+    .max(1000, {
+      message: 'Comment must be at most 1000 characters long',
+    }),
+});
+
 function validateImageFile() {
   const maxUploadSize = 1024 * 1024;
   const acceptedFileTypes = ['image/'];

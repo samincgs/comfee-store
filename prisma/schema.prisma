@@ -23,20 +23,39 @@ model Product {
   company String
   price Int
   featured Boolean
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+
 
   favorites Favorite[]
+  reviews Review[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
 }
 
 model Favorite {
   id String @id @default(uuid())
   clerkId String
+  productId String
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
 
+model Review {
+  id String @id @default(uuid())
+  clerkId String
+  rating Int
+  comment String
+  authorName String
+  authorImageUrl String
   productId String
+
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
 }

@@ -4,7 +4,12 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { db } from './db';
 import { redirect } from 'next/navigation';
-import { imageSchema, productSchema, validateSchema } from './schemas';
+import {
+  imageSchema,
+  productSchema,
+  reviewSchema,
+  validateSchema,
+} from './schemas';
 import { deleteImage, uploadImage } from './supabase';
 import { revalidatePath } from 'next/cache';
 
@@ -285,3 +290,37 @@ export const fetchUserFavorites = async () => {
 
   return favorites;
 };
+
+export const createReviewAction = async (
+  prevState: any,
+  formData: FormData
+) => {
+  const userId = await getAuthUser();
+
+  try {
+    const rawData = Object.fromEntries(formData);
+    const validatedFields = validateSchema(reviewSchema, rawData);
+
+    await db.review.create({
+      data: {
+        clerkId: userId,
+        ...validatedFields,
+      },
+    });
+
+    revalidatePath(`/products/${validatedFields.productId}`);
+    return { message: 'Review submitted successfully' };
+  } catch (error) {
+    return renderError(error);
+  }
+};
+
+export const fetchProductReviews = async () => {};
+
+export const fetchProductReviewsByUser = async () => {};
+
+export const deleteReviewAction = async () => {};
+
+export const findExistingReview = async () => {};
+
+export const fetchProductRating = async () => {};
