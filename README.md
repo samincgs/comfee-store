@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Comfee
 
-## Getting Started
+## [IN PROGRESS]
 
-First, run the development server:
+INFO SOON 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Frameworks/Libraries Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Next.js 14 (App Router)
+- React
+- TypeScript
+- TailwindCSS
+- Shadcn-ui
+- Clerk
+- Supabase
+- Prisma
+- Zod
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Users are able to search for products efficiently by entering keywords related to the product name or company.
+- Users can easily mark or unmark products as favorites. There is also a dedicated favorites page that lists all the products they have selected.
+- Users are able to share product links effortlessly on LinkedIn, Facebook, and via email with integrated social media buttons.
+- Users can personalize their experience with both dark and light modes
+- Users can browse their desired products on the products page, presented in either a grid or list layout.
 
-## Learn More
+## MORE TO BE ADDED SOON 
 
-To learn more about Next.js, take a look at the following resources:
+### Credits
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Inspired by John Smilga <3
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check him out! [John's Youtube Channel](https://www.youtube.com/@CodingAddict)
+<br/>
