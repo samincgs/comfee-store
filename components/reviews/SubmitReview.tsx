@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import FormContainer from '@/components/form/FormContainer';
 import { createReviewAction } from '@/utils/actions';
-import TextAreaInput from '../form/TextAreaInput';
-import { SubmitButton } from '../form/Buttons';
+import TextAreaInput from '@/components/form/TextAreaInput';
+import { SubmitButton } from '@/components/form/Buttons';
 const SubmitReview = ({ productId }: { productId: string }) => {
   const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
   const { user } = useUser();
