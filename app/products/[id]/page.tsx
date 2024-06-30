@@ -4,6 +4,7 @@ import Breadcrumbs from '@/components/products/Breadcrumbs';
 import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
 import ProductRating from '@/components/products/ProductRating';
 import ShareButton from '@/components/products/ShareButton';
+import ProductReviews from '@/components/reviews/ProductReviews';
 import SubmitReview from '@/components/reviews/SubmitReview';
 import { fetchSingleProduct } from '@/utils/actions';
 import { formatCurrency } from '@/utils/format';
@@ -50,7 +51,7 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
       </div>
       <div className='mt-8'>
         {/* Reviews */}
-        <Heading text='Product Reviews' />
+        <ProductReviews productId={params.id} />
         <SubmitReview productId={params.id} />
       </div>
     </div>

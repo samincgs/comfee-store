@@ -13,7 +13,7 @@ const SubmitReview = ({ productId }: { productId: string }) => {
   const { user } = useUser();
 
   return (
-    <div className='mt-4'>
+    <div className='mt-12'>
       <Button
         size={'lg'}
         onClick={() => setIsReviewFormVisible((prev) => !prev)}
