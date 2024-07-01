@@ -21,6 +21,10 @@ export const links: Links[] = [
     href: '/favorites',
   },
   {
+    label: 'Reviews',
+    href: '/reviews',
+  },
+  {
     label: 'Cart',
     href: '/cart',
   },
