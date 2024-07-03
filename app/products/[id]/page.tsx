@@ -1,4 +1,3 @@
-import Heading from '@/components/global/Heading';
 import AddToCart from '@/components/products/AddToCart';
 import Breadcrumbs from '@/components/products/Breadcrumbs';
 import FavoriteToggleButton from '@/components/products/FavoriteToggleButton';
@@ -6,14 +5,18 @@ import ProductRating from '@/components/products/ProductRating';
 import ShareButton from '@/components/products/ShareButton';
 import ProductReviews from '@/components/reviews/ProductReviews';
 import SubmitReview from '@/components/reviews/SubmitReview';
-import { fetchSingleProduct } from '@/utils/actions';
+import { fetchSingleProduct, findExistingReview } from '@/utils/actions';
 import { formatCurrency } from '@/utils/format';
+import { auth } from '@clerk/nextjs/server';
 import Image from 'next/image';
 
 const SingleProductPage = async ({ params }: { params: { id: string } }) => {
   const product = await fetchSingleProduct({ id: params.id });
   const { name, company, price, description, image } = product;
   const formattedPrice = formatCurrency(price);
+  const { userId } = auth();
+  const reviewDoesNotExist =
+    userId && !(await findExistingReview({ userId, productId: params.id }));
 
   return (
     <div>
@@ -52,7 +55,8 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
       <div className='mt-8'>
         {/* Reviews */}
         <ProductReviews productId={params.id} />
-        <SubmitReview productId={params.id} />
+        {/* Submit Review */}
+        {reviewDoesNotExist && <SubmitReview productId={params.id} />}
       </div>
     </div>
   );

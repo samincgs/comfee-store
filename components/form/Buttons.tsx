@@ -40,7 +40,13 @@ export const SubmitButton = ({
 
 type actionType = 'edit' | 'delete';
 
-export const IconButton = ({ actionType }: { actionType: actionType }) => {
+export const IconButton = ({
+  actionType,
+  variant = 'ghost',
+}: {
+  actionType: actionType;
+  variant?: 'ghost' | 'outline' | 'secondary' | 'default' | 'destructive';
+}) => {
   const { pending } = useFormStatus();
 
   const renderIcon = () => {
@@ -59,7 +65,7 @@ export const IconButton = ({ actionType }: { actionType: actionType }) => {
   };
 
   return (
-    <Button type='submit' size={'icon'} variant={'ghost'}>
+    <Button type='submit' size={'icon'} variant={variant}>
       {pending ? <Loader2 className='w-4 h-4 animate-spin' /> : renderIcon()}
     </Button>
   );
