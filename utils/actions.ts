@@ -1,7 +1,7 @@
 'use server';
 // PUT USE SERVER AT THE TOP IF YOU ARE DEALING WITH FORMDATA
 
-import { currentUser } from '@clerk/nextjs/server';
+import { auth, currentUser } from '@clerk/nextjs/server';
 import { db } from './db';
 import { redirect } from 'next/navigation';
 import {
@@ -413,4 +413,18 @@ export const findExistingReview = async ({
   });
 
   return review;
+};
+
+export const fetchCartItems = async () => {
+  const { userId } = auth();
+  const cart = await db.cart.findFirst({
+    where: {
+      clerkId: userId || '',
+    },
+    select: {
+      numItemsInCart: true,
+    },
+  });
+
+  return cart?.numItemsInCart || 0;
 };
